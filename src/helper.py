@@ -22,7 +22,8 @@ class PreprocessedPacket:
         self.src_port = src_port
         self.dest_ip = dest_ip
         self.dest_port = dest_port
-    
+
+
 def send_preprocessed_packet(sock, preprocessed_packet):
     src_ip = preprocessed_packet.src_ip
     src_port = preprocessed_packet.src_port
@@ -114,8 +115,12 @@ def recv_preprocessed_packet(sock) -> PreprocessedPacket:
 
 def send_payload_to_device(dest_ip, dest_port, payload):
     # Create a socket
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        # Connect to the destination address
-        sock.connect((dest_ip, dest_port))
-        payload_encoded = payload.encode()
-        sock.sendall(payload_encoded)
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            # Connect to the destination address
+            sock.connect((dest_ip, dest_port))
+            payload_encoded = payload.encode()
+            sock.sendall(payload_encoded)
+            return True
+    except:
+        return False

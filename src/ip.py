@@ -1,4 +1,4 @@
-import scapy
+#!/home/liyu/anaconda3/envs/CN/bin/python3
 from scapy.layers.inet import Ether, TCP, IP
 from scapy.all import *
 def main (x):
